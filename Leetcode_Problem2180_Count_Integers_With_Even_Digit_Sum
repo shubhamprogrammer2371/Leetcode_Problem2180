@@ -1,0 +1,55 @@
+int countEven(int num) {
+    int sum , count = 0;
+    for( int i = 2 ; i <= num ; i++)
+    {
+        sum = 0;
+        int temp = i;
+        while(temp)
+        {
+            sum += temp%10;
+            temp /= 10;
+        }
+        count += !(sum&1) ? 1 : 0;
+    }
+    return count;
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+int digsum(int n)
+{
+    int sum = 0;
+    while(n)
+    {
+        sum += n%10;
+        n /= 10;
+    }
+    return sum;
+}
+int countEven(int num)
+{
+    int count = 0;
+    for(int i = 2 ; i <= num ; i++)
+        if(!(digsum(i)%2))
+            count++;
+    return count;
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+int countEven(const int num){
+	assert(num >= 1);
+	if (num & 1)  //If num is odd, return (num + 1) / 2 - 1, which equals to (num - 1) / 2.
+		return num >> 1;
+
+	bool odd = false; //Now num is even, check whether digit sum of num is odd.
+	for (int numCopy = num; numCopy > 0; numCopy /= 10)
+		if ( (numCopy % 10) & 1 ) //If digit is odd, change odd(var).
+			odd ^= 1;
+
+	return ( (num - 2) >> 1 ) + (odd? 0 : 1);  //num / 2 - 1, plus num if its digit sum is even.
+}
